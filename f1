@@ -1,0 +1,535 @@
+Practical no 1
+Aim:- Write a python program to implement multiplication matrix and discuss its time complexity
+
+m=int(input("Enter numbers of rows matrix 1: "))
+n=int(input("Enter numbers of columns matrix 1: "))
+mat1=[]
+for i in range(0,m):
+    mat1.append([])
+for i in range(0,m):
+    for j in range(0,n):
+        mat1[i].append(j)
+        mat1[i][j]=0
+        print("Entry in row",i+1,"column ",j+1)
+        mat1[i][j]=int(input())
+print(mat1)
+#Matrices 2
+p=int(input("Enter numbers of rows matrix 2: "))
+q=int(input("Enter numbers of columns matrix 2:"))
+mat2=[]
+for i in range(0,p):
+    mat2.append([]) 
+for i in range(0,p):
+    for j in range(0,q):
+        mat2[i].append(j)
+        mat2[i][j]=0
+        print("Entry in row",i+1,"column",j+1)
+        mat2[i][j]=int(input())
+print(mat2)
+
+#Result matrix
+res=[]
+for i in range(0,m):
+    res.append([])
+for i in range(0,m):
+    for j in range(0,q):
+        res[i].append(j)
+        res[i][j]=0
+
+#Checking the Multiplication possibilities
+print("Multiplication result:")
+if n!=p:
+    print("Multiplication is  not possible")
+else:
+    for p in range(len(mat1)):
+        for q in range(len(mat2[0])):
+                for r in range(len(mat2)):
+                    res[p][q]+=mat1[p][r]*mat2[r][q]
+print(res)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+practical no 2 quicksort algoritm
+
+
+def quicksort (testlist,start,end): #T(n)
+   if start<end:
+      pivot=partition(testlist,start,end) #n
+      quicksort(testlist,start,pivot-1) #T(n/2)
+      quicksort(testlist,pivot+1,end) #T(n/2)
+      return testlist
+def partition(testlist,start,end):
+    pivot=testlist[end]
+    i=start-1
+    for j in range (start,end):
+        if testlist[j]<=pivot:
+            i+=1
+            testlist[i],testlist[j]=testlist[j],testlist[i]
+    testlist[i+1],testlist[end]=testlist[end],testlist[i+1]
+    return (i+1)
+list1=[9,-3,5,2,6,8,-6,1,3]
+print("list before sorting=",list1)
+print("After sorting")
+l2=quicksort(list1,0,len(list1)-1)
+print(l2)
+
+practical no--3 Merge sort Algoritm
+
+def mergesort(mylist):
+    print("Dividing:",mylist)
+    if(len(mylist)>1):
+        mid=len(mylist)//2
+        Leftlist=mylist[:mid]
+        Rightlist=mylist[mid:]
+        mergesort(Leftlist)
+        mergesort(Rightlist)
+        i=0
+        j=0
+        k=0
+        while(i<len(Leftlist) and (j<len(Rightlist))):
+            if Leftlist[i]<=Rightlist[j]:
+                mylist[k]=Leftlist[i]
+                i=i+1
+            else:
+                mylist[k]=Rightlist[j]
+                j=j+1
+            k=k+1
+        while i<len(Leftlist):
+            mylist[k]=Leftlist[i]
+            i=i+1
+            k=k+1
+        
+        while j<len(Rightlist):
+            mylist[k]=Rightlist[j]
+            j=j+1
+            k=k+1
+        print("merging:",mylist)
+        return mylist
+num=int(input("How many number you want in list:"))
+list1=[int(input())for x in range(num)]
+mergesort(list1)
+print("Sorted list: ",list1)
+
+practical no---4 LINEAR SEARCH
+
+def linearsearch(mylist,n,x):
+    for i in range(0,n):
+        if (mylist[i]==x):
+            return i
+            return -1
+mylist=[2,33,45,1,30,34,56]
+x=1
+result=linearsearch(mylist,7,x)
+if (result==-1):
+    print("Element is not Present in list")
+else:
+    print("Element is present and at index of",result)
+
+
+PRACTICAL NO---5 BINARY SEARCH
+
+def binary_search(arr,low,high,x):
+    if high>=low:
+        mid=(high+low)//2
+        if arr[mid]==x:
+            return mid
+        elif arr[mid]>x:
+            return binary_search(arr,low,mid-1,x)
+        else:
+            return binary_search(arr,mid+1,high,x)
+    else:
+        return -1
+arr=[2,3,6,11,13,8]
+x=3
+print(arr)
+print("X=",x)
+result=binary_search(arr,0,len(arr)-1,x)
+if(result!=1):
+    print("Element is not Found")
+else:
+    print("Element is prsent at a index ",result)
+
+PRACTICAL NO----6  INSERTION OPERATION OF BINARY TREE
+
+class Node:
+    def __init__(self,index):
+        self.left=None
+        self.right=None
+        self.val=index
+def insert(root,newnode):
+    if root is None:
+        root=newnode
+    else:
+        if root.val<=newnode.val:
+            if root.right is None:
+                root.right=newnode
+            else:
+                insert(root.right,newnode)
+        elif root.val==newnode.val:
+            print("Element is already present",newnode.val)
+        else:
+            if root.left is None:
+                root.left=newnode
+            else:
+                insert(root.left,newnode)
+def inorder(root):
+    if root:
+        if root.val==None:
+            print(end=" ")
+        else:
+            inorder(root.left)
+            print(root.val)
+            inorder(root.right)
+def preorder(root):
+    if root:
+        if root.val==None:
+            print(end=" ")
+        else:
+            print(root.val)
+            preorder(root.left)
+            preorder(root.right)
+def postorder(root):
+    if root:
+        if root.val==None:
+            print(end=" ")
+        else:
+            postorder(root.left)
+            postorder(root.right)
+            print(root.val)
+root=Node(70)
+insert(root,Node(60))
+insert(root,Node(50))
+insert(root,Node(90))
+insert(root,Node(40))
+insert(root,Node(53))
+insert(root,Node(120))
+insert(root,Node(100))
+insert(root,Node(95))
+insert(root,Node(1200))
+insert(root,Node(80))
+print("inorder Traversal:")
+inorder(root)
+print("preorder Traversal:")
+preorder(root)
+print("postorder Traversal:")
+postorder(root)
+
+
+PRACTICAL NO--7----DELETION 
+
+class Node:
+    def __init__(self,index):
+        self.left=None
+        self.right=None
+        self.val=index
+def insert(root,newnode):
+    if root is None:
+        root=newnode
+    else:
+        if root.val<newnode.val:
+            if root.right is None:
+                root.right=newnode
+            else:
+                insert(root.right,newnode)
+        elif root.val==newnode.val:
+            print("Already present",newnode.val)
+        else:
+            if root.left is None:
+                root.left=newnode
+            else:
+                insert(root.left,newnode)
+def inorder(root):
+    if root:
+        if root.val==None:
+            print(end="")
+        else:
+            inorder(root.left)
+            print(root.val)
+            inorder(root.right)
+def preorder(root):
+    if root:
+        if root.val==None:
+            print(end="")
+        else:
+            preorder(root.left)
+            print(root.val)
+            preorder(root.right)
+def postorder(root):
+    if root:
+        if root.val==None:
+            print(end="")
+        else:
+            postorder(root.left)
+            print(root.val)
+            postorder(root.right)
+def delete(root,node1):
+    if root is None:
+        print("Empty tree")
+    elif root.val<node1:
+        delete(root.right,node1)
+    elif root.val>node1:
+        delete(root.left,node1)
+    else:
+        root.val=None
+root=Node(70)
+insert(root,Node(60))
+insert(root,Node(50))
+insert(root,Node(90))
+insert(root,Node(40))
+insert(root,Node(53))
+insert(root,Node(80))
+insert(root,Node(120))
+insert(root,Node(95))
+insert(root,Node(1200))
+insert(root,Node(75))
+delete(root,40)
+print("inorder Traversal:")
+inorder(root)
+print("preorder Traversal:")
+preorder(root)
+print("postorder Traversal:")
+postorder(root)
+
+
+Practical no 8
+Aim:-Write a program to implement breadth first traversal search of a graph
+
+
+
+
+
+graph = {
+  'A' : ['B','C'],
+  'B' : ['D', 'E'],
+  'C' : ['F'],
+  'D' : [],
+  'E' : ['F'],
+  'F' : []
+}
+
+visited = [] # List to keep track of visited nodes.
+queue = []     #Initialize a queue
+
+def bfs(visited, graph, node):
+  visited.append(node)
+  queue.append(node)
+
+  while queue:
+    s = queue.pop(0) 
+    print (s, end = " ") 
+
+    for neighbour in graph[s]:
+      if neighbour not in visited:
+        visited.append(neighbour)
+        queue.append(neighbour)
+
+
+
+
+Practical no 9
+Aim:- Write a program to implement Depth first traversal search of a graph
+
+graph = {
+    'A' : ['B','C'],
+    'B' : ['D', 'E'],
+    'C' : ['F'],
+    'D' : [],
+    'E' : ['F'],
+    'F' : []
+}
+
+visited = set() # Set to keep track of visited nodes.
+
+def dfs(visited, graph, node):
+    if node not in visited:
+        print (node)
+        visited.add(node)
+        for neighbour in graph[node]:
+            dfs(visited, graph, neighbour)
+
+
+
+Practical no 10
+Aim:-Write a python program to check whether the given graph g has a simple path form source s to destination d.
+
+
+graph={ 'A':['B','C'],
+        'B':['C','D'],
+        'C':['D'],
+        'D':['C'],
+        'E':['F'],
+        'F':['C']}
+
+def find_all_paths(graph,start,end,path=[]):
+    path=path+[start]   #including source vertex in path
+    #print(path)
+    if start==end:
+        return [path]
+    if start not in graph:
+        print("No path as Undefined Source")
+        return None
+    paths=[]     #to store all possible path
+    for node in graph[start]:   #to iterate every node of every vertex
+        if node not in path:    #giving reursive call if current node not in path
+            newpaths=find_all_paths(graph,node,end,path)  #recursive call by changing strt vertex as a current node
+            for newpath in newpaths:
+                paths.append(newpath)
+    return paths
+
+
+Practical no 11
+Aim:-Write a python program to implement selection sort algorithm and discuss its time complexity
+
+
+
+a=list()
+n=int(input("Enter number of elements in list"))
+print("enter number of array")
+for i in range(n):
+    num=input()
+    a.append(int(num))
+
+print(a)
+for i in range(len(a)):
+    min_ind=i
+    for j in range(i+1,len(a)):
+        if a[min_ind]>a[j]:
+            min_ind=j
+    a[min_ind],a[i]=a[i],a[min_ind]
+    print("Iteration %d",(i+1))
+    print(a)
+print("Smallest element is %d",a[0])
+print("Largest element is %d",a[len(a)-1])
+
+
+
+Practical no 12
+Aim:-Using tournament method find the second largest number in th list
+
+
+groups=[]
+def largest(list1):
+    global groups
+    if len(list1)==1:
+        #print("*",list1[0])
+        return list1[0]
+    else:
+        left=largest(list1[:len(list1)//2])
+        #print("left",left)
+        right=largest(list1[len(list1)//2:])
+        #print("right",right)
+        groups.append((left,right))
+        #print(groups)
+        #print("max",max(left,right))
+        return max(left,right)
+l1=largest([3,10,9,50,60,30])
+print("First Largest is:",l1)
+s=[]
+for item in groups:
+    if l1 in item:
+        s.append(min(item))
+print("Second Largest is:",max(s))
+
+
+Broadcast reciever 
+main activity
+package com.example.broadcast;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import android.content.Intent;
+import android.content.IntentFilter;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+
+public class MainActivity extends AppCompatActivity {
+    Button b1;
+    private MyReciever mReciever=new MyReciever();
+    private static final String ACTION_CUSTOM_BROADCAST="ACTION_CUSTOM_BROADCAST";
+
+
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        b1=findViewById(R.id.b1);
+        IntentFilter os=new IntentFilter();
+        os.addAction(Intent.ACTION_BATTERY_LOW);
+        os.addAction(Intent.ACTION_POWER_CONNECTED);
+        os.addAction(Intent.ACTION_POWER_DISCONNECTED);
+        this.registerReceiver(mReciever,os);
+        LocalBroadcastManager.getInstance(this).registerReceiver(mReciever,new IntentFilter(ACTION_CUSTOM_BROADCAST));
+        b1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent custombroadcast=new Intent(ACTION_CUSTOM_BROADCAST);
+                LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(custombroadcast);
+
+            }
+        });
+
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        this.unregisterReceiver(mReciever);
+        LocalBroadcastManager.getInstance(this).unregisterReceiver(mReciever);
+        super.onDestroy();
+    }
+}
+
+my reciever file
+import android.content.BroadcastReceiver;
+import android.content.Context;
+import android.content.Intent;
+import android.widget.Toast;
+
+
+public class MyReciever extends BroadcastReceiver {
+    private static final String ACTION_CUSTOM_BROADCAST= "ACTION_CUSTOM_BROADCAST";
+    @Override
+    public void onReceive(Context context, Intent intent) {
+        String intentAction=intent.getAction();
+        if(intentAction!=null){
+            String msg="Unknown intent";
+            switch(intentAction){
+                case Intent.ACTION_BATTERY_LOW:
+                    msg="Battery low";
+                    break;
+                case Intent.ACTION_POWER_CONNECTED:
+                    msg="Power connected";
+                    break;
+                case Intent.ACTION_POWER_DISCONNECTED:
+                    msg="Power disconnected";
+                    break;
+                case ACTION_CUSTOM_BROADCAST:
+                    msg="Custom Broadcast Reciecver";
+                    break;
+            }
+            Toast.makeText(context, msg, Toast.LENGTH_SHORT).show();
+        }
+
+    }
+}
+
+
+
+
+
+
+
